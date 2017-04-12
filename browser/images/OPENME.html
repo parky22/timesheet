@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Timesheet</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link href='app.css' rel='stylesheet'/>
+
+  </head>
+
+  <body>
+    <header class='container-fluid'>
+      <h1>Timesheet</h1>
+      </header>
+      <div id='content' class='container-fluid'>
+        <form id='timesheet' name='timesheetForm' action='' method='POST'>
+            Employee Id (required): <br /><input type='number' name='employee-id' id='employee-id-input' size='1'/ required><br />
+
+            <br />
+
+            Punched IN Time: <br /><input id='punch-in-display' name='punch-in-display-name'size='40'></input>
+            <button id='punch-in' type='button' class='btn btn-success'>Punch In</button><br />
+
+            <br />
+
+            Punched OUT Time: <br /><input id='punch-out-display' name='punch-out-display-name'size='40'></input>
+            <button id='punch-out' type='button' class='btn btn-danger'>Punch Out</button><br />
+
+            <br />
+
+            Comments:<br /> <textarea name='comments' rows='3' cols='35' placeholder='example: lunch, errand, early leave'></textarea><br />
+
+          <input id='submit' type='submit' class='btn btn-primary'></input>
+        </form>
+      </div>
+  </body>
+
+<iframe src="#" id="no-target" name="no-target" style="visibility:hidden"></iframe>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+   <!--Bootstrap: Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src='app.js' type='application/javascript'></script>
+
+</html>
+
