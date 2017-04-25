@@ -6,6 +6,8 @@ export default class Timesheet extends React.Component {
     this.state = {
       input: ''
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
@@ -23,15 +25,15 @@ export default class Timesheet extends React.Component {
           <h1>Timesheet</h1>
         </header>
         <div id='content' class='container-fluid'>
-          <form id='timesheet' onSubmit={handleSubmit}>
+          <form id='timesheet' onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label className="col-xs-2 control-label">Employee Id (required): </label>
               <div className="col-xs-10">
                 <input
                   className="form-control"
                   type="text"
-                  onChange={handleChange}
-                  value={inputValue}
+                  onChange={this.handleChange}
+                  value={this.state.input}
                 />
               </div>
               <label className="col-xs-2 control-label">Punched IN Time: </label>
@@ -39,8 +41,8 @@ export default class Timesheet extends React.Component {
                 <input
                   className="form-control"
                   type="text"
-                  onChange={handleChange}
-                  value={inputValue}
+                  onChange={this.handleChange}
+                  value={this.state.input}
                 />
               </div>
               <label className="col-xs-2 control-label">Punched OUT Time: </label>
@@ -48,8 +50,8 @@ export default class Timesheet extends React.Component {
                 <input
                   className="form-control"
                   type="text"
-                  onChange={handleChange}
-                  value={inputValue}
+                  onChange={this.handleChange}
+                  value={this.state.input}
                 />
               </div>
               <label className="col-xs-2 control-label">Comments: </label>
@@ -57,8 +59,8 @@ export default class Timesheet extends React.Component {
                 <textarea
                   className="form-control"
                   type="text"
-                  onChange={handleChange}
-                  value={inputValue}
+                  onChange={this.handleChange}
+                  value={this.state.input}
                 />
               </div>
             </div>
@@ -67,8 +69,8 @@ export default class Timesheet extends React.Component {
                 <button
                   type="submit"
                   className="btn btn-success"
-                  disabled={!!warning || !inputValue}>
-                  Create Playlist
+                  disabled={!this.state.input}>
+                  Submit
               </button>
               </div>
             </div>
