@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
+const db = require('./db');
 
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -20,8 +21,11 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
+db.sync()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server is listening on port ${port}`);
+    });
+  })
 
 module.exports = app;

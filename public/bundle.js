@@ -12152,7 +12152,7 @@ var Timesheet = function (_React$Component) {
         null,
         _react2.default.createElement(
           'header',
-          { 'class': 'container-fluid' },
+          { className: 'container-fluid' },
           _react2.default.createElement(
             'h1',
             null,
@@ -12161,7 +12161,7 @@ var Timesheet = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { id: 'content', 'class': 'container-fluid' },
+          { id: 'content', className: 'container-fluid' },
           _react2.default.createElement(
             'form',
             { id: 'timesheet', onSubmit: this.handleSubmit },
@@ -14498,10 +14498,12 @@ function parserForArrayFormat(opts) {
 		case 'bracket':
 			return function (key, value, accumulator) {
 				result = /(\[\])$/.exec(key);
-
 				key = key.replace(/\[\]$/, '');
 
-				if (!result || accumulator[key] === undefined) {
+				if (!result) {
+					accumulator[key] = value;
+					return;
+				} else if (accumulator[key] === undefined) {
 					accumulator[key] = [value];
 					return;
 				}

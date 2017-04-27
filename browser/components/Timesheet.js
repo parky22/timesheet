@@ -21,10 +21,10 @@ export default class Timesheet extends React.Component {
   render() {
     return (
       <div>
-        <header class='container-fluid'>
+        <header className='container-fluid'>
           <h1>Timesheet</h1>
         </header>
-        <div id='content' class='container-fluid'>
+        <div id='content' className='container-fluid'>
           <form id='timesheet' onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label className="col-xs-2 control-label">Employee Id (required): </label>
