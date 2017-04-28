@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/employees', require('./routes/employees-route'));
+app.use('/times', require('./routes/times-route'));
 
 app.get('/', (req, res, next) => {
   res.send('index');

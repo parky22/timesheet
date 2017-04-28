@@ -3,8 +3,10 @@ const db = require('../db');
 
 const Time = db.define('time', {
   timeIn: {
-    type: Sequelize.DATE,
-    defaultValue: Date.now()
+    type: Sequelize.DATE
+  },
+  timeOut: {
+    type: Sequelize.DATE
   }
 });
 
