@@ -12825,6 +12825,7 @@ var Timesheet = function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleTime = _this.handleTime.bind(_this);
     return _this;
   }
 
@@ -12847,6 +12848,13 @@ var Timesheet = function (_React$Component) {
         default:
 
       }
+    }
+  }, {
+    key: 'handleTime',
+    value: function handleTime(timeType) {
+      _axios2.default.post('/times/' + timeType).then(function (res) {
+        return res.data;
+      });
     }
   }, {
     key: 'handleSubmit',
@@ -12915,8 +12923,8 @@ var Timesheet = function (_React$Component) {
                 _react2.default.createElement('input', {
                   className: 'form-control',
                   type: 'text',
-                  onChange: function onChange(e) {
-                    return _this2.handleChange(e, 'timeIn');
+                  onChange: function onChange() {
+                    return _this2.handleTime('timeIn');
                   },
                   value: this.state.input,
                   required: true
@@ -12930,15 +12938,18 @@ var Timesheet = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'col-xs-10' },
-                _react2.default.createElement('input', {
-                  className: 'form-control',
-                  type: 'text',
-                  onChange: function onChange(e) {
-                    return _this2.handleChange(e, 'timeOut');
-                  },
-                  value: this.state.input,
-                  required: true
-                })
+                _react2.default.createElement(
+                  'button',
+                  {
+                    className: 'form-control',
+                    type: 'text',
+                    onClick: function onClick() {
+                      return _this2.handleTime('timeOut');
+                    },
+                    value: this.state.input,
+                    required: true },
+                  'Time OUT'
+                )
               ),
               _react2.default.createElement(
                 'label',

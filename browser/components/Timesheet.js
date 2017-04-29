@@ -8,10 +8,12 @@ export default class Timesheet extends React.Component {
       idInput: '',
       timeIn: '',
       timeOut: '',
-      comments: ''
+      comments: '',
+      timeInId: 0
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleTime = this.handleTime.bind(this);
   }
 
   handleChange(e, inputType) {
@@ -31,6 +33,21 @@ export default class Timesheet extends React.Component {
       default:
 
     }
+  }
+
+  handleTimeIn() {
+    const time = new Date();
+    axios.post(`/times`, {timeIn: time})
+      .then(res => res.data)
+      .then(postedTime => {
+        this.setState({timeInId: postedTime.id});
+      });
+  }
+
+  handleTimeOut() {
+    const time = new Date();
+    axios.put(`/times/${this.state.timeInId}`, {timeOut: time})
+      .then(res => res.data);
   }
 
   handleSubmit() {
@@ -67,20 +84,21 @@ export default class Timesheet extends React.Component {
                 <input
                   className="form-control"
                   type="text"
-                  onChange={(e) => this.handleChange(e, 'timeIn')}
+                  onChange={() => this.handleTime('timeIn')}
                   value={this.state.input}
                   required
                 />
               </div>
               <label className="col-xs-2 control-label">Punched OUT Time: </label>
               <div className="col-xs-10">
-                <input
+                <button
                   className="form-control"
                   type="text"
-                  onChange={(e) => this.handleChange(e, 'timeOut')}
+                  onClick={() => this.handleTime('timeOut')}
                   value={this.state.input}
-                  required
-                />
+                  required>
+                Time OUT
+                </button>
               </div>
               <label className="col-xs-2 control-label">Comments: </label>
               <div className="col-xs-10">
