@@ -13,99 +13,99 @@ export default class Timesheet extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleTime = this.handleTime.bind(this);
   }
 
   handleChange(e, inputType) {
+    const newTime = new Date();
     switch (inputType) {
       case 'idInput':
         this.setState({ idInput: e.target.value });
         break;
       case 'timeIn':
-        this.setState({ timeIn: e.target.value });
+        this.setState({ timeIn: newTime.toString() });
         break;
       case 'timeOut':
-        this.setState({ timeOut: e.target.value });
+        this.setState({ timeOut: newTime.toString() });
         break;
       case 'comments':
         this.setState({ comments: e.target.value });
         break;
       default:
-
+        return;
     }
-  }
-
-  handleTimeIn() {
-    const time = new Date();
-    axios.post(`/times`, {timeIn: time})
-      .then(res => res.data)
-      .then(postedTime => {
-        this.setState({timeInId: postedTime.id});
-      });
-  }
-
-  handleTimeOut() {
-    const time = new Date();
-    axios.put(`/times/${this.state.timeInId}`, {timeOut: time})
-      .then(res => res.data);
   }
 
   handleSubmit() {
     const employeeId = this.state.idInput;
-    const submitInfo = {
-      timeIn: this.state.timeIn,
-      timeOut: this.state.timeOut
-    }
-    axios.post(`/employees/${employeeId}`, submitInfo)
+    // If a timeIn hasn't been submitted, create a timeIn
+    if (this.state.timeInId === 0) {
+      axios.post(`/times/${employeeId}`, {timeIn: this.state.timeIn})
+        .then(res => res.data)
+        .then(postedTimeIn => {
+          this.setState({ timeInId: postedTimeIn.id })
+        });
+    } else { // Else, update the current timeIn with timeOut
+      axios.put(`/times/${this.state.timeInId}`, { timeOut: this.state.timeOut })
       .then(res => res.data)
+      .then((updatedTime) => {
+        // reset timeInId to 0 so that a new timeIn can be submitted
+        this.setState({timeInId: 0})
+      })
+    }
   }
 
   render() {
     return (
       <div>
-        <header className='container-fluid'>
+        <header className="container-fluid">
           <h1>Timesheet</h1>
         </header>
-        <div id='content' className='container-fluid'>
-          <form id='timesheet' onSubmit={this.handleSubmit}>
+        <div id="content" className="container-fluid">
+          <form id="timesheet">
             <div className="form-group">
               <label className="col-xs-2 control-label">Employee Id (required): </label>
               <div className="col-xs-10">
                 <input
                   className="form-control"
                   type="text"
-                  onChange={(e) => this.handleChange(e, 'idInput')}
+                  onChange={e => this.handleChange(e, 'idInput')}
                   value={this.state.input}
                   required
                 />
               </div>
               <label className="col-xs-2 control-label">Punched IN Time: </label>
               <div className="col-xs-10">
-                <input
+                <button
                   className="form-control"
-                  type="text"
-                  onChange={() => this.handleTime('timeIn')}
-                  value={this.state.input}
-                  required
-                />
+                  onClick={e => this.handleChange(e, 'timeIn')}>
+                  Time IN
+                </button>
+                {
+                  this.state.timeIn ?
+                    <div><h1>{this.state.timeIn.toString()}</h1></div> :
+                    null
+                }
               </div>
               <label className="col-xs-2 control-label">Punched OUT Time: </label>
               <div className="col-xs-10">
                 <button
                   className="form-control"
-                  type="text"
-                  onClick={() => this.handleTime('timeOut')}
-                  value={this.state.input}
-                  required>
-                Time OUT
+                  onClick={e => this.handleChange(e, 'timeOut')}
+                  value={this.state.input}>
+                  Time OUT
                 </button>
+                {
+                  this.state.timeOut ?
+                    <div><h1>{this.state.timeOut.toString()}</h1></div> :
+                    null
+                }
               </div>
               <label className="col-xs-2 control-label">Comments: </label>
               <div className="col-xs-10">
                 <textarea
                   className="form-control"
                   type="text"
-                  onChange={(e) => this.handleChange(e, 'comments')}
+                  onChange={e => this.handleChange(e, 'comments')}
                   value={this.state.input}
                 />
               </div>
@@ -115,7 +115,8 @@ export default class Timesheet extends React.Component {
                 <button
                   type="submit"
                   className="btn btn-success"
-                  disabled={!this.state.input}>
+                  disabled={!this.state.idInput}
+                  onClick={this.handleSubmit}>
                   Submit
               </button>
               </div>
