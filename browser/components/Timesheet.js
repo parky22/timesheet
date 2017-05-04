@@ -96,7 +96,8 @@ export default class Timesheet extends React.Component {
                 </button>
                 {
                   this.state.timeOut ?
-                    <div><h1>{this.state.timeOut.toString()}</h1></div> :
+                    <div><h1>{this.state.timeOut.toString()}</h1></div>
+                    :
                     null
                 }
               </div>
