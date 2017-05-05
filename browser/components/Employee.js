@@ -42,10 +42,13 @@ export default class Login extends React.Component {
             <input
               placeholder="Full Name"
               onChange={e => this.handleChange(e)}
-              value={this.state.input} />
+              value={this.state.input}
+              required />
             <button
               type="submit"
-              onClick={this.handleSubmit}>
+              className="btn btn-success"
+              onClick={this.handleSubmit}
+              disabled={!this.state.input}>
               Submit
             </button>
           </form>

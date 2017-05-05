@@ -9,13 +9,7 @@ header {
   text-align: center;
 }
 
-#content {
-  background-color: rgba(255,255,255,0.85);
-  text-align: left;
-  padding: 50px 20px 50px 20px;
-  width: 700px;
+#main {
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
-#punch-in-display, #punch-out-display {
-  color: #05018D;
-}

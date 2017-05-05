@@ -13016,12 +13016,15 @@ var Login = function (_React$Component) {
               onChange: function onChange(e) {
                 return _this3.handleChange(e);
               },
-              value: this.state.input }),
+              value: this.state.input,
+              required: true }),
             _react2.default.createElement(
               'button',
               {
                 type: 'submit',
-                onClick: this.handleSubmit },
+                className: 'btn btn-success',
+                onClick: this.handleSubmit,
+                disabled: !this.state.input },
               'Submit'
             )
           )
@@ -13046,6 +13049,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
@@ -13054,36 +13059,78 @@ var _reactRouter = __webpack_require__(71);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Main = function Main(props) {
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      'h1',
-      null,
-      ' Broadway Auto Parts Timesheet '
-    ),
-    _react2.default.createElement(
-      'h3',
-      null,
-      _react2.default.createElement(
-        _reactRouter.Link,
-        { to: '/employee' },
-        'Create Employee Account'
-      )
-    ),
-    _react2.default.createElement(
-      'h3',
-      null,
-      _react2.default.createElement(
-        _reactRouter.Link,
-        { to: '/timesheet' },
-        'Submit Time'
-      )
-    ),
-    props.children
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Main = function (_React$Component) {
+  _inherits(Main, _React$Component);
+
+  function Main() {
+    _classCallCheck(this, Main);
+
+    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
+
+    _this.state = {
+      initialActive: true
+    };
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
+  }
+
+  _createClass(Main, [{
+    key: 'handleClick',
+    value: function handleClick() {
+      this.setState({ initialActive: !this.state.initialActive });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { id: 'main', className: 'col-xs-12' },
+        _react2.default.createElement(
+          'h1',
+          { className: 'text-center' },
+          ' Broadway Auto Parts Timesheet '
+        ),
+        _react2.default.createElement(
+          'ul',
+          { className: 'nav nav-tabs' },
+          _react2.default.createElement(
+            'li',
+            {
+              role: 'presentation',
+              className: this.state.initialActive ? 'active' : '',
+              onClick: this.handleClick },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/timesheet' },
+              'Submit Time'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            {
+              role: 'presentation',
+              className: this.state.initialActive ? '' : 'active',
+              onClick: this.handleClick },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/employee' },
+              'Create Account'
+            )
+          )
+        ),
+        this.props.children
+      );
+    }
+  }]);
+
+  return Main;
+}(_react2.default.Component);
 
 exports.default = Main;
 
@@ -13207,14 +13254,10 @@ var Timesheet = function (_React$Component) {
               'div',
               { className: 'form-group' },
               _react2.default.createElement(
-                'label',
-                { className: 'col-xs-2 control-label' },
-                'Employee Id (required): '
-              ),
-              _react2.default.createElement(
                 'div',
                 { className: 'col-xs-10' },
                 _react2.default.createElement('input', {
+                  placeholder: 'Employee Id',
                   className: 'form-control',
                   type: 'text',
                   onChange: function onChange(e) {
@@ -13223,11 +13266,6 @@ var Timesheet = function (_React$Component) {
                   value: this.state.input,
                   required: true
                 })
-              ),
-              _react2.default.createElement(
-                'label',
-                { className: 'col-xs-2 control-label' },
-                'Punched IN Time: '
               ),
               _react2.default.createElement(
                 'div',
@@ -13250,11 +13288,6 @@ var Timesheet = function (_React$Component) {
                     this.state.timeIn.toString()
                   )
                 ) : null
-              ),
-              _react2.default.createElement(
-                'label',
-                { className: 'col-xs-2 control-label' },
-                'Punched OUT Time: '
               ),
               _react2.default.createElement(
                 'div',
@@ -13280,14 +13313,10 @@ var Timesheet = function (_React$Component) {
                 ) : null
               ),
               _react2.default.createElement(
-                'label',
-                { className: 'col-xs-2 control-label' },
-                'Comments: '
-              ),
-              _react2.default.createElement(
                 'div',
                 { className: 'col-xs-10' },
                 _react2.default.createElement('textarea', {
+                  placeholder: 'Comments',
                   className: 'form-control',
                   type: 'text',
                   onChange: function onChange(e) {

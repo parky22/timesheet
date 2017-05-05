@@ -63,9 +63,9 @@ export default class Timesheet extends React.Component {
         <div id="content" className="container-fluid">
           <form id="timesheet">
             <div className="form-group">
-              <label className="col-xs-2 control-label">Employee Id (required): </label>
               <div className="col-xs-10">
                 <input
+                  placeholder="Employee Id"
                   className="form-control"
                   type="text"
                   onChange={e => this.handleChange(e, 'idInput')}
@@ -73,7 +73,6 @@ export default class Timesheet extends React.Component {
                   required
                 />
               </div>
-              <label className="col-xs-2 control-label">Punched IN Time: </label>
               <div className="col-xs-10">
                 <button
                   className="form-control"
@@ -86,7 +85,6 @@ export default class Timesheet extends React.Component {
                     null
                 }
               </div>
-              <label className="col-xs-2 control-label">Punched OUT Time: </label>
               <div className="col-xs-10">
                 <button
                   className="form-control"
@@ -101,9 +99,9 @@ export default class Timesheet extends React.Component {
                     null
                 }
               </div>
-              <label className="col-xs-2 control-label">Comments: </label>
               <div className="col-xs-10">
                 <textarea
+                  placeholder="Comments"
                   className="form-control"
                   type="text"
                   onChange={e => this.handleChange(e, 'comments')}

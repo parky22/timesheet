@@ -1,15 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const Main = (props) => {
-  return (
-    <div>
-      <h1> Broadway Auto Parts Timesheet </h1>
-      <h3><Link to="/employee">Create Employee Account</Link></h3>
-      <h3><Link to="/timesheet">Submit Time</Link></h3>
-      {props.children}
-    </div>
-  )
-};
+export default class Main extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      initialActive: true
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-export default Main;
+  handleClick() {
+    this.setState({ initialActive: !this.state.initialActive });
+  }
+
+  render() {
+    return (
+      <div id="main" className="col-xs-12">
+        <h1 className="text-center"> Broadway Auto Parts Timesheet </h1>
+        <ul className="nav nav-tabs">
+          <li
+            role="presentation"
+            className={this.state.initialActive ? 'active' : ''}
+            onClick={this.handleClick}>
+            <Link to="/timesheet">Submit Time</Link>
+          </li>
+          <li
+            role="presentation"
+            className={this.state.initialActive ? '' : 'active'}
+            onClick={this.handleClick}>
+            <Link to="/employee">Create Account</Link>
+          </li>
+        </ul>
+        {this.props.children}
+      </div>
+    )
+  }
+}

@@ -4,7 +4,9 @@ const db = require('../db');
 const Employee = db.define('employee', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    validate: {
+      notEmpty: true
+    }
   }
 });
 
